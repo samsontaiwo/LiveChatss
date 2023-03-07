@@ -1,13 +1,11 @@
+import Layout from '~/components/Layout';
 
-
-
-const  Index =  () => {
+const Index = () => {
   return (
-    <div id="box">
-      asdfdddhhh
+    <Layout>
+      <p>hello chat</p>
+    </Layout>
+  );
+};
 
-    </div>
-  )
-}
-
-export default Index
+export default Index;
