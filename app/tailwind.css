@@ -19,7 +19,7 @@
   body {
     @apply w-full;
     @apply font-normal;
-    @apply bg-pink-600;
+    @apply bg-white;
     justify-content: center;
     @display: flex;
 
@@ -31,6 +31,10 @@
 
 
 .login-page{
-  height: 500px; width: 50%;
+  height: 500px; width: 500px;
   border: solid 4px black;
+}
+
+.login-input{
+  width: 100px;
 }
