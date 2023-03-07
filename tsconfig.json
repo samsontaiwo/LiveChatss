@@ -1,10 +1,11 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "./.eslintrc.js", "./commitlint.config.js"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
+    "skipLibCheck": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "ES2019",
