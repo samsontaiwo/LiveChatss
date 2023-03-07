@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+    text-size-adjust: 100%;
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+
+  /**
+    * makes the document full min-height
+  */
+  body {
+    @apply w-full;
+    @apply font-normal;
+    @apply bg-white;
+    justify-content: center;
+    @apply flex;
+
+    min-height: -moz-available;
+    min-height: -webkit-fill-available;
+
+    @apply h-full;
+  }
+}
+
+.login-page {
+  height: 500px;
+  width: 500px;
+  border: solid 4px black;
+}
+
+.login-input {
+  width: 100px;
+}
