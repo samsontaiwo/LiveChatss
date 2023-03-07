@@ -2,21 +2,18 @@ import { useState } from 'react';
 
 import Layout from '~/components/Layout';
 import Login from '~/components/Login';
+import Register from '~/components/Register';
+
 
 
 const Index = () => {
-  const [userInfo, setUserInfo] = useState([]);
-  const [passwordVisibility, setPasswordVisibility] = useState<boolean>(true);
-  const [loginPage, setLoginPage] = useState<boolean>(false);
-  const [userCreateToggle, setUserCreateToggle] = useState<boolean>(true);
+  const [curForm, setCurForm] = useState('login')
+
   return (
     <Layout>
-      {userCreateToggle && <Login
-        passwordVisibility={passwordVisibility}
-        setPasswordVisibility={setPasswordVisibility}
-        userCreateToggle={userCreateToggle} setUserCreateToggle={setUserCreateToggle}
-        loginPage={loginPage} setLoginPage={setLoginPage}
-      />}
+      {
+        curForm === 'login' ? <Login curForm={curForm} setCurForm={setCurForm}/> : <Register setCurForm={setCurForm}/>
+      }
     </Layout>
   );
 };

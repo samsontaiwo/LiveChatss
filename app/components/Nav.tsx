@@ -1,5 +1,5 @@
 const Nav = () => {
-  return <div className="border">Nav</div>;
+  return <div className="border"></div>;
 };
 
 export default Nav;

@@ -1,54 +1,36 @@
-import React from 'react'
-import { faEye } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { Dispatch, SetStateAction} from 'react';
-import ExistingUser from './ExistingUser';
 
+import React  from 'react';
+import { useState } from 'react';
+import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 
+const Login = ({curForm, setCurForm} : {curForm: string; setCurForm: Dispatch<SetStateAction<string>>}) => {
 
-const CreateUser = ({loginPage, setLoginPage, passwordVisibility, setPasswordVisibility, userCreateToggle, setUserCreateToggle} : { loginPage: boolean; setLoginPage: Dispatch<SetStateAction<boolean>>; userCreateToggle: boolean; setUserCreateToggle: Dispatch<SetStateAction<boolean>>; passwordVisibility: boolean; setPasswordVisibility : Dispatch<SetStateAction<boolean>>}) => {
+    const [email, setEmail] = useState('');
+    const [passw, setPassw] = useState('');
 
-    const handlePasswordVisibility = () => {
-        setPasswordVisibility(!passwordVisibility)
+    const handlePasswChange = (eve:ChangeEvent<HTMLInputElement>) => {
+        setPassw(eve.target.value)
     }
-    const handleExistingUser = () => {
-        setUserCreateToggle(!userCreateToggle)
-        setLoginPage(!loginPage)
+    const handleEmailChange = (eve:ChangeEvent<HTMLInputElement>) => {
+        setEmail(eve.target.value)
     }
-
+    const handleChangeFormToRegister = () => {
+        setCurForm('register')
+    }
+    const emailPlaceHolder = 'youremail@domain.com'; const passwordPlaceHolder = 'password';
 
     return (
-        <div className= 'login-page'>
+        <div>
             <form>
-                <section>
-                    <label htmlFor='firstName'>First Name: </label>
-                    <label htmlFor='lastname'>Last Name: </label>
-                </section>
-                <section>
-                    <input className='loginInput'type='text' placeholder='First Name'/>
-                    <input type='text' placeholder='Last Name'/>
-                </section>
-                <section>
-                    <label htmlFor='email-password'>
-                        Email Address <br/>
-                        <input type='email' placeholder='Enter your email'/> <br/>
-                        Password  <br/>
-                        <input type={passwordVisibility ? 'password' : 'text'} placeholder='Enter new password'/> 
-                        <button className='password-toggle' onClick={()=>handlePasswordVisibility()}><FontAwesomeIcon icon={faEye}/></button>
-                        <br/>     
-                    </label> <br/>    
-                </section>
-                <button>Continue to ChatR</button>
+                <label htmlFor='email'>Email</label>
+                <input id='email' value={email} type='email' placeholder={emailPlaceHolder} onChange={(eve)=>handleEmailChange(eve)}/> <br/>
+                <label htmlFor={passwordPlaceHolder}>Pasword</label>
+                <input id='password' value={passw} type='password' placeholder={passwordPlaceHolder} onChange={(eve)=>handlePasswChange(eve)}/> <br/>
+                <button type='submit' disabled={passw.length<1} >ChatR</button>
             </form>
-            <span>Already have an account?<button onClick={()=>handleExistingUser()}>Login</button></span>
-            {loginPage && <ExistingUser 
-                loginPage={loginPage}
-                setLoginPage={setLoginPage}
-                userCreateToggle={userCreateToggle} setUserCreateToggle={setUserCreateToggle}
-      
-            />}
+            <button onClick={()=>handleChangeFormToRegister()}>Don't have an account? Click Here</button>
         </div>
     )
 }
 
-export default CreateUser
+export default Login;
