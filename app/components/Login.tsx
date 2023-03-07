@@ -2,13 +2,18 @@ import React from 'react'
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, SetStateAction} from 'react';
+import ExistingUser from './ExistingUser';
 
 
 
-const CreateUser = ({passwordVisibility, setPasswordVisibility} : {passwordVisibility: boolean; setPasswordVisibility : Dispatch<SetStateAction<boolean>>}) => {
+const CreateUser = ({loginPage, setLoginPage, passwordVisibility, setPasswordVisibility, userCreateToggle, setUserCreateToggle} : { loginPage: boolean; setLoginPage: Dispatch<SetStateAction<boolean>>; userCreateToggle: boolean; setUserCreateToggle: Dispatch<SetStateAction<boolean>>; passwordVisibility: boolean; setPasswordVisibility : Dispatch<SetStateAction<boolean>>}) => {
 
     const handlePasswordVisibility = () => {
         setPasswordVisibility(!passwordVisibility)
+    }
+    const handleExistingUser = () => {
+        setUserCreateToggle(!userCreateToggle)
+        setLoginPage(!loginPage)
     }
 
 
@@ -35,7 +40,13 @@ const CreateUser = ({passwordVisibility, setPasswordVisibility} : {passwordVisib
                 </section>
                 <button>Continue to ChatR</button>
             </form>
-            <span>Already have an account?<a href='notworkingyet.html'>Login here</a></span>
+            <span>Already have an account?<button onClick={()=>handleExistingUser()}>Login</button></span>
+            {loginPage && <ExistingUser 
+                loginPage={loginPage}
+                setLoginPage={setLoginPage}
+                userCreateToggle={userCreateToggle} setUserCreateToggle={setUserCreateToggle}
+      
+            />}
         </div>
     )
 }

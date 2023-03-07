@@ -3,16 +3,20 @@ import { useState } from 'react';
 import Layout from '~/components/Layout';
 import Login from '~/components/Login';
 
+
 const Index = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(true);
+  const [loginPage, setLoginPage] = useState<boolean>(false);
+  const [userCreateToggle, setUserCreateToggle] = useState<boolean>(true);
   return (
     <Layout>
-      <p>hello chat</p>
-      <Login
+      {userCreateToggle && <Login
         passwordVisibility={passwordVisibility}
         setPasswordVisibility={setPasswordVisibility}
-      />
+        userCreateToggle={userCreateToggle} setUserCreateToggle={setUserCreateToggle}
+        loginPage={loginPage} setLoginPage={setLoginPage}
+      />}
     </Layout>
   );
 };
