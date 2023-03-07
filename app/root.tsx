@@ -9,7 +9,7 @@ import {
   useCatch,
 } from '@remix-run/react';
 
-import stylesheet from '~/tailwind.css';
+import stylesheet from '~/lib/styles/tailwind.css';
 
 import Layout from './components/Layout';
 import { iosSplashScreens } from './lib/utils';
