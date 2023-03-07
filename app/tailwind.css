@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -11,7 +11,7 @@
   html,
   body {
     @apply h-full;
-  }
+  } */
 
   /**
     * makes the document full min-height
@@ -21,11 +21,16 @@
     @apply font-normal;
     @apply bg-pink-600;
     justify-content: center;
-    @apply flex;
+    @display: flex;
 
     min-height: -moz-available;
     min-height: -webkit-fill-available;
 
     @apply h-full;
   }
+
+
+.login-page{
+  height: 500px; width: 50%;
+  border: solid 4px black;
 }
