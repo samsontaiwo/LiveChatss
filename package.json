@@ -4,7 +4,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev",
+    "dev": "prisma generate && prisma migrate dev && remix dev",
     "typecheck": "tsc"
   },
   "lint-staged": {
@@ -27,6 +27,7 @@
     "@remix-run/vercel": "^1.14.0",
     "@vercel/node": "^2.6.2",
     "isbot": "latest",
+    "prisma": "^4.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
