@@ -1,11 +1,14 @@
-import React from 'react';
+
+import { useSubmit } from '@remix-run/react';
 import { useState } from 'react';
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
+
 
 const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> }) => {
   const [email, setEmail] = useState('');
   const [passw, setPassw] = useState('');
   const [name, setName] = useState('');
+  const submit = useSubmit()
 
   const handlePasswChange = (eve: ChangeEvent<HTMLInputElement>) => {
     setPassw(eve.target.value);
@@ -19,6 +22,9 @@ const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>>
   const handleChangeFormToLogin = () => {
     setCurForm('login');
   };
+  const handleCreate = () => {
+    submit({username: email, password: passw}, {method: 'post', replace: true})
+  }
   const emailPlaceHolder = 'youremail@domain.com';
   const passwordPlaceHolder = 'password';
 
@@ -53,7 +59,7 @@ const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>>
             onChange={(eve) => handlePasswChange(eve)}
           />
           <br />
-          <button className="submit-login" type="submit" disabled={passw.length < 1}>
+          <button className="submit-login" type="submit" disabled={passw.length < 1} onClick={()=>handleCreate()}>
             Create
           </button>
           </div>
