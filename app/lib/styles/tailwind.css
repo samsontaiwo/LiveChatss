@@ -30,7 +30,7 @@
     @apply h-full;
   }
 }
-#first {
+.first {
   height: 700px;
   padding: 50px;
   border: solid 1px grey;
@@ -47,12 +47,12 @@
   width: 250px;
   height: 50px;
 }
-#email {
+.email, .name{
   border: solid 1.5px black;
   border-radius: 2px;
   padding: 5px;
 }
-#password {
+.password {
   border: solid 1.5px black;
   border-radius: 2px;
   padding: 5px;

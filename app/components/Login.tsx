@@ -18,26 +18,26 @@ const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> })
   const passwordPlaceHolder = 'password';
 
   return (
-    <div id="first">
+    <div className="first">
       <form>
         <div className="email-passw">
           <label htmlFor="email">Email</label>
           <input
-            id="email"
+            className="email"
             value={email}
             type="email"
             placeholder={emailPlaceHolder}
             onChange={(eve) => handleEmailChange(eve)}
-          />{' '}
+          />
           <br />
           <label htmlFor={passwordPlaceHolder}>Pasword</label>
           <input
-            id="password"
+            className="password"
             value={passw}
             type="password"
             placeholder={passwordPlaceHolder}
             onChange={(eve) => handlePasswChange(eve)}
-          />{' '}
+          />
           <br />
           <button className="submit-login" type="submit" disabled={passw.length < 1}>
             ChatR

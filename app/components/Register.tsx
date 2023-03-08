@@ -23,40 +23,42 @@ const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>>
   const passwordPlaceHolder = 'password';
 
   return (
-    <div>
+    <div className="first">
       <form>
-        <label htmlFor="name">Name</label>
-        <input
-          value={name}
-          type="text"
-          id="name"
-          placeholder="Fullname"
-          onChange={(eve) => handleNameChange(eve)}
-        />{' '}
-        <br />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          value={email}
-          type="email"
-          placeholder={emailPlaceHolder}
-          onChange={(eve) => handleEmailChange(eve)}
-        />{' '}
-        <br />
-        <label htmlFor={passwordPlaceHolder}>Enter new pasword</label>
-        <input
-          id="password"
-          value={passw}
-          type="text"
-          placeholder={passwordPlaceHolder}
-          onChange={(eve) => handlePasswChange(eve)}
-        />{' '}
-        <br />
-        <button type="submit" disabled={passw.length < 1}>
-          Create
-        </button>
+        <div className="email-passw">
+          <label htmlFor="name">Name</label>
+          <input
+            value={name}
+            type="text"
+            className="name"
+            placeholder="Fullname"
+            onChange={(eve) => handleNameChange(eve)}
+          />
+          <br />
+          <label htmlFor="email">Email</label>
+          <input
+            className="email"
+            value={email}
+            type="email"
+            placeholder={emailPlaceHolder}
+            onChange={(eve) => handleEmailChange(eve)}
+          />
+          <br />
+          <label htmlFor={passwordPlaceHolder}>Enter new pasword</label>
+          <input
+            className="password"
+            value={passw}
+            type="text"
+            placeholder={passwordPlaceHolder}
+            onChange={(eve) => handlePasswChange(eve)}
+          />
+          <br />
+          <button className="submit-login" type="submit" disabled={passw.length < 1}>
+            Create
+          </button>
+          </div>
       </form>
-      <button onClick={() => handleChangeFormToLogin()}>Existing user? Login Here</button>
+      <button className="switch-page" onClick={() => handleChangeFormToLogin()}>Existing user? Login Here</button>
     </div>
   );
 };
