@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Dispatch, SetStateAction, ChangeEvent } from 'react';
+import { ActionFunction } from '@remix-run/node';
 
 const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> }) => {
   const [email, setEmail] = useState('');
