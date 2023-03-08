@@ -1,21 +1,12 @@
-import { useState } from 'react';
-
-import Layout from '~/components/Layout';
-import Login from '~/components/Login';
-import Register from '~/components/Register';
-
-
+import { redirect } from '@remix-run/node';
 
 const Index = () => {
-  const [curForm, setCurForm] = useState('login')
+  // @todo landing page
+  return null;
+};
 
-  return (
-    <Layout>
-      {
-        curForm === 'login' ? <Login setCurForm={setCurForm}/> : <Register setCurForm={setCurForm}/>
-      }
-    </Layout>
-  );
+export const loader = async () => {
+  return redirect('/login');
 };
 
 export default Index;
