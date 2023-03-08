@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import bcyrpt from 'bcrypt'
+
 import Login from '~/components/Login';
 import Register from '~/components/Register';
 import { prisma } from '~/services/db.server';
@@ -19,8 +21,10 @@ export const action: ActionFunction = async ({request}: ActionArgs) => {
   const data = await request.formData()
   const username = data.get('username')
   const password = data.get('password')
+  const name = data.get('name')
   if(username && password){
-    await prisma.user.create({data: {username, passwordHash: password}})
+    const passwordHash = await bcyrpt.hash(password, 10)
+    await prisma.user.create({data: {passwordHash, username, name}})
   }
 }
 

@@ -23,10 +23,10 @@ const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>>
     setCurForm('login');
   };
   const handleCreate = () => {
-    submit({username: email, password: passw}, {method: 'post', replace: true})
+    submit({name: name, password: passw, username: email}, {method: 'post', replace: true})
   }
-  const emailPlaceHolder = 'youremail@domain.com';
   const passwordPlaceHolder = 'password';
+  const condition = (passw.length < 1) || (name.length < 1) || (email.length < 1)
 
   return (
     <div className="first">
@@ -41,12 +41,12 @@ const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>>
             onChange={(eve) => handleNameChange(eve)}
           />
           <br />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Username</label>
           <input
             className="email"
             value={email}
-            type="email"
-            placeholder={emailPlaceHolder}
+            type="text"
+            placeholder={'Username'}
             onChange={(eve) => handleEmailChange(eve)}
           />
           <br />
@@ -54,12 +54,12 @@ const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>>
           <input
             className="password"
             value={passw}
-            type="text"
+            type="password"
             placeholder={passwordPlaceHolder}
             onChange={(eve) => handlePasswChange(eve)}
           />
           <br />
-          <button className="submit-login" type="submit" disabled={passw.length < 1} onClick={()=>handleCreate()}>
+          <button className="submit-login" type="submit" disabled={condition} onClick={()=>handleCreate()}>
             Create
           </button>
           </div>

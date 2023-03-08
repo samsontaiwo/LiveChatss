@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import type { Dispatch, SetStateAction, ChangeEvent } from 'react';
+ 
+import { useSubmit } from '@remix-run/react';
 import { ActionFunction } from '@remix-run/node';
+import { useState } from 'react';
+import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
+
+
 
 const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> }) => {
   const [email, setEmail] = useState('');
   const [passw, setPassw] = useState('');
+  const submit = useSubmit();
 
   const handlePasswChange = (eve: ChangeEvent<HTMLInputElement>) => {
     setPassw(eve.target.value);
@@ -15,19 +20,21 @@ const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> })
   const handleChangeFormToRegister = () => {
     setCurForm('register');
   };
-  const emailPlaceHolder = 'youremail@domain.com';
+  const handleLogin = () => {
+    submit({password: passw, username: email}, {method: 'post', replace: true})
+  }
   const passwordPlaceHolder = 'password';
 
   return (
     <div className="first">
       <form>
         <div className="email-passw">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Username</label>
           <input
             className="email"
             value={email}
-            type="email"
-            placeholder={emailPlaceHolder}
+            type="text"
+            placeholder={'Username'}
             onChange={(eve) => handleEmailChange(eve)}
           />
           <br />
@@ -40,7 +47,7 @@ const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> })
             onChange={(eve) => handlePasswChange(eve)}
           />
           <br />
-          <button className="submit-login" type="submit" disabled={passw.length < 1}>
+          <button className="submit-login" type="submit" disabled={passw.length < 1} onClick={()=>handleLogin()}>
             ChatR
           </button>
         </div>
