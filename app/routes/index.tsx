@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <Layout>
       {
-        curForm === 'login' ? <Login curForm={curForm} setCurForm={setCurForm}/> : <Register setCurForm={setCurForm}/>
+        curForm === 'login' ? <Login setCurForm={setCurForm}/> : <Register setCurForm={setCurForm}/>
       }
     </Layout>
   );

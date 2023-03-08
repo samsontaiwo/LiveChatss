@@ -1,9 +1,8 @@
 
-import React  from 'react';
 import { useState } from 'react';
 import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 
-const Login = ({curForm, setCurForm} : {curForm: string; setCurForm: Dispatch<SetStateAction<string>>}) => {
+const Login = ({setCurForm} : {setCurForm: Dispatch<SetStateAction<string>>}) => {
 
     const [email, setEmail] = useState('');
     const [passw, setPassw] = useState('');
@@ -20,15 +19,20 @@ const Login = ({curForm, setCurForm} : {curForm: string; setCurForm: Dispatch<Se
     const emailPlaceHolder = 'youremail@domain.com'; const passwordPlaceHolder = 'password';
 
     return (
-        <div>
+        <div id='first'>
             <form>
-                <label htmlFor='email'>Email</label>
-                <input id='email' value={email} type='email' placeholder={emailPlaceHolder} onChange={(eve)=>handleEmailChange(eve)}/> <br/>
-                <label htmlFor={passwordPlaceHolder}>Pasword</label>
-                <input id='password' value={passw} type='password' placeholder={passwordPlaceHolder} onChange={(eve)=>handlePasswChange(eve)}/> <br/>
-                <button type='submit' disabled={passw.length<1} >ChatR</button>
+                <div className='email-passw'>
+                    <label htmlFor='email'>Email</label>
+                    <input id='email' value={email} type='email' placeholder={emailPlaceHolder} onChange={(eve)=>handleEmailChange(eve)}/> <br/>
+                    <label htmlFor={passwordPlaceHolder}>Pasword</label>
+                    <input id='password' value={passw} type='password' placeholder={passwordPlaceHolder} onChange={(eve)=>handlePasswChange(eve)}/> <br/>
+                    <button className='submit-login'type='submit' disabled={passw.length<1} >ChatR</button>
+                    
+                </div>
+                
+                
             </form>
-            <button onClick={()=>handleChangeFormToRegister()}>Don't have an account? Click Here</button>
+            <button className='switch-page'onClick={()=>handleChangeFormToRegister()}>Don't have an account? Click Here</button>
         </div>
     )
 }
