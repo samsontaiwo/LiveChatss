@@ -6,6 +6,7 @@ import Login from '~/components/Login';
 import Register from '~/components/Register';
 import { prisma } from '~/services/db.server';
 import { type ActionArgs, ActionFunction } from '@remix-run/node';
+import { User } from '@prisma/client';
 
 const Index = () => {
   const [curForm, setCurForm] = useState('login');
@@ -24,20 +25,33 @@ const Index = () => {
 export const action: ActionFunction = async ({ request }: ActionArgs) => {
   const data = await request.formData();
 
-  const username = data.get('username');
-  const password = data.get('password');
-  const name = data.get('name');
+  const username = data.get('username') as string;
+  const password = data.get('password') as string;
+  const registering = data.get('registering') as string;
+  const name = data.get('name') as string;
 
-  const authenticated = await prisma.user.findUnique({
-    where: { username },
-  });
-  // if (authenticated) {
-  // }
-  if (username && password) {
+  if (!username || !password || !name) {
+    return {
+      formError: 'form not submitted correctly',
+    };
+  }
+
+  console.log({ username, password, name });
+
+  if (registering === 'true') {
     const passwordHash = await bcyrpt.hash(password, 10);
     await prisma.user.create({ data: { passwordHash, username, name } });
+  } else {
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
 
-    return null;
+    if (!currentUser) return null;
+    let isCorrectPw = await bcyrpt.compare(password, currentUser.passwordHash);
+    if (!isCorrectPw) return null;
+    return currentUser;
   }
 };
 

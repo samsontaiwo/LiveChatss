@@ -27,7 +27,10 @@ const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> })
     setCurForm('register');
   };
   const handleLogin = () => {
-    submit({password: passw, username: email}, {method: 'post', replace: true})
+    submit(
+      { password: passw, username: email, registering: 'false' },
+      { method: 'post', replace: true },
+    );
   }
   const passwordPlaceHolder = 'password';
 

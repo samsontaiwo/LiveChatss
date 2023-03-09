@@ -23,7 +23,10 @@ const Register = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>>
     setCurForm('login');
   };
   const handleCreate = () => {
-    submit({name: name, password: passw, username: email}, {method: 'post', replace: true})
+    submit(
+      { name: name, password: passw, username: email, registering: 'true' },
+      { method: 'post', replace: true },
+    );
   }
   const passwordPlaceHolder = 'password';
   const condition = (passw.length < 1) || (name.length < 1) || (email.length < 1)
