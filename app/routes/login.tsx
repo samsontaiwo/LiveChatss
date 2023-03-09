@@ -37,8 +37,6 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
     };
   }
 
-  console.log({ username, password, name });
-
   if (registering === 'true') {
     const passwordHash = await bcyrpt.hash(password, 10);
     await prisma.user.create({ data: { passwordHash, username, name } });

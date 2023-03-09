@@ -8,7 +8,7 @@ import bcyrpt from 'bcrypt';
 import { type ActionArgs, ActionFunction } from '@remix-run/node';
 
 const Home = () => {
-  return <></>;
+  return <>Welcome</>;
 };
 
 export const action: ActionFunction = async ({ request }: ActionArgs) => {
