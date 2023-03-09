@@ -5,7 +5,13 @@ import { useState } from 'react';
 import type { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 
-
+/**
+ * Create user session
+ * After the login ->  
+ * Failed submission ->
+ * 
+ * @returns a session
+ */
 const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> }) => {
   const [email, setEmail] = useState('');
   const [passw, setPassw] = useState('');
@@ -47,7 +53,12 @@ const Login = ({ setCurForm }: { setCurForm: Dispatch<SetStateAction<string>> })
             onChange={(eve) => handlePasswChange(eve)}
           />
           <br />
-          <button className="submit-login" type="submit" disabled={passw.length < 1} onClick={()=>handleLogin()}>
+          <button
+            className="submit-login"
+            type="submit"
+            disabled={passw.length < 1}
+            onClick={() => handleLogin()}
+          >
             ChatR
           </button>
         </div>

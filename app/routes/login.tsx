@@ -10,6 +10,10 @@ import { type ActionArgs, ActionFunction } from '@remix-run/node';
 const Index = () => {
   const [curForm, setCurForm] = useState('login');
 
+  // if (data.authenticated) {
+  //   redirect('/home');
+  // }
+
   return curForm === 'login' ? (
     <Login setCurForm={setCurForm} />
   ) : (
@@ -17,16 +21,25 @@ const Index = () => {
   );
 };
 
-export const action: ActionFunction = async ({request}: ActionArgs) => {
-  const data = await request.formData()
-  const username = data.get('username')
-  const password = data.get('password')
-  const name = data.get('name')
-  if(username && password){
-    const passwordHash = await bcyrpt.hash(password, 10)
-    await prisma.user.create({data: {passwordHash, username, name}})
+export const action: ActionFunction = async ({ request }: ActionArgs) => {
+  const data = await request.formData();
+
+  const username = data.get('username');
+  const password = data.get('password');
+  const name = data.get('name');
+
+  const authenticated = await prisma.user.findUnique({
+    where: { username },
+  });
+  // if (authenticated) {
+  // }
+  if (username && password) {
+    const passwordHash = await bcyrpt.hash(password, 10);
+    await prisma.user.create({ data: { passwordHash, username, name } });
+
+    return null;
   }
-}
+};
 
 
 
