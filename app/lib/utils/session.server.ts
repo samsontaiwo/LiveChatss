@@ -1,8 +1,33 @@
 import { createCookieSessionStorage, redirect } from '@remix-run/node';
+import { prisma } from '~/services/db.server';
+import bcrypt from 'bcrypt';
 
-let sessionSecret = process.env.SESSION_SECRET;
+type LoginType = {
+  username: string;
+  password: string;
+};
+
+export async function register({ username, password }: LoginType) {
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = await prisma.user.create({
+    data: { username, passwordHash },
+  });
+  return user;
+}
+
+export async function login({ username, password }: LoginType) {
+  const existingUser = await prisma.user.findFirst({ where: { username } });
+  if (!existingUser) return null;
+
+  const passwordsMatch = await bcrypt.compare(password, existingUser.passwordHash);
+  if (!passwordsMatch) return null;
+
+  return existingUser;
+}
+
+const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
-  throw new Error('SESSION_SECRET must be set');
+  throw new Error('Must set environment variable SESSION_SECRET');
 }
 
 const { getSession, commitSession, destroySession } = createCookieSessionStorage({
@@ -36,9 +61,15 @@ export async function createUserSession(userId: string, redirectTo: string) {
   });
 }
 
+export async function getUser(request: Request) {
+  const userId = await getUserId(request);
+  if (!userId) return null;
+  return prisma.user.findUnique({ where: { id: userId } });
+}
+
 export async function logout(request: Request) {
-  let session = await getUserSession(request);
-  return redirect(`/jokes`, {
+  const session = await getUserSession(request);
+  return redirect(`/`, {
     headers: {
       'Set-Cookie': await destroySession(session),
     },

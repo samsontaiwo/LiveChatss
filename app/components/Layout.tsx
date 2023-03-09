@@ -4,7 +4,7 @@ import Nav from './Nav';
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="w-[600px] border">
+    <div className="w-[600px]">
       <Nav />
       {children}
     </div>

@@ -1,19 +1,20 @@
-import { useState } from 'react';
-
-import bcyrpt from 'bcrypt';
-
-// import Login from '~/components/Login';
-// import Register from '~/components/Register';
-// import { prisma } from '~/services/db.server';
-import { type ActionArgs, ActionFunction } from '@remix-run/node';
+import { LoaderFunction } from '@remix-run/node';
+import { Link, useLoaderData } from '@remix-run/react';
+import { getUser } from '~/lib/utils/session.server';
 
 const Home = () => {
-  return <>Welcome</>;
+  const { user } = useLoaderData();
+  return <>Welcome {user ? <Link to="/logout">logout</Link> : <Link to="/login">login</Link>}</>;
 };
 
-export const action: ActionFunction = async ({ request }: ActionArgs) => {
-  const data = await request.formData(); // from database
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request);
+  return { user };
 };
+
+// export const action: ActionFunction = async ({ request }: ActionArgs) => {
+//   const data = await request.formData(); // from database
+// };
 
 export default Home;
 
