@@ -12,7 +12,7 @@ import {
 import stylesheet from '~/lib/styles/tailwind.css';
 
 import Layout from './components/Layout';
-import { iosSplashScreens } from './lib/utils';
+import { iosSplashScreens } from './lib/utils/utils';
 
 const App = () => {
   return (
