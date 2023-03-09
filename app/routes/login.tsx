@@ -7,6 +7,7 @@ import Register from '~/components/Register';
 import { prisma } from '~/services/db.server';
 import { type ActionArgs, ActionFunction } from '@remix-run/node';
 import { User } from '@prisma/client';
+import { createUserSession } from '~/lib/utils/session.server';
 
 const Index = () => {
   const [curForm, setCurForm] = useState('login');
@@ -51,7 +52,7 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
     if (!currentUser) return null;
     let isCorrectPw = await bcyrpt.compare(password, currentUser.passwordHash);
     if (!isCorrectPw) return null;
-    return currentUser;
+    return createUserSession(currentUser.id, '/home');
   }
 };
 
