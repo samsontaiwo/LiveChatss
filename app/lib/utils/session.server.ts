@@ -18,13 +18,13 @@ const { getSession, commitSession, destroySession } = createCookieSessionStorage
 });
 
 export function getUserSession(request: Request) {
-  return getSession(request.headers.get("Cookie"));
+  return getSession(request.headers.get('Cookie'));
 }
 
 export async function getUserId(request: Request) {
   const session = await getUserSession(request);
-  const userId = session.get("userId");
-  if (!userId || typeof userId !== "string") return null;
+  const userId = session.get('userId');
+  if (!userId || typeof userId !== 'string') return null;
   return userId;
 }
 
@@ -33,5 +33,14 @@ export async function createUserSession(userId: string, redirectTo: string) {
   session.set('userId', userId);
   return redirect(redirectTo, {
     headers: { 'Set-Cookie': await commitSession(session) },
+  });
+}
+
+export async function logout(request: Request) {
+  let session = await getUserSession(request);
+  return redirect(`/jokes`, {
+    headers: {
+      'Set-Cookie': await destroySession(session),
+    },
   });
 }
