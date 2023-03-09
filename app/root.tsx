@@ -32,19 +32,19 @@ export const meta: MetaFunction = () => {
     'apple-mobile-web-app-status-bar-style': 'black',
     charset: 'utf-8',
     description,
-    keywords: 'remix live chat, live chat, chat',
+    keywords: 'remix live chat, live chat, chat, chatr',
     'og:description': description,
     // 'og:image': '/meta-image.png',
-    'og:image:alt': 'chat',
+    'og:image:alt': 'chatr',
     // 'og:image:height': '630',
     // 'og:image:type': 'image/png',
     // 'og:image:width': '1200',
-    'og:title': 'chat',
+    'og:title': 'chatr',
 
     // 'twitter:card': 'summary_large_image',
     'twitter:description': description,
     // 'twitter:image': '/meta-image.png',
-    'twitter:title': 'chat',
+    'twitter:title': 'chatr',
     viewport: 'width=device-width,initial-scale=1,user-scalable=no',
   };
 };
@@ -90,7 +90,7 @@ type DocumentProps = {
   title?: string;
 };
 
-const Document = ({ children, title = 'chat' }: DocumentProps) => {
+const Document = ({ children, title = 'chatr' }: DocumentProps) => {
   return (
     <html lang="en">
       <head>
@@ -111,7 +111,7 @@ const Document = ({ children, title = 'chat' }: DocumentProps) => {
 export const ErrorBoundary = ({ error }: { error: Error }) => {
   console.error(error);
   return (
-    <Document title="chat - Error">
+    <Document title="chatr - Error">
       <Layout>
         <header>Oops, unhandled error</header>
         <p>Trace(for debug): {error.message}</p>
@@ -136,7 +136,7 @@ export const CatchBoundary = () => {
       message = <p>Oops, this definitely shouldn&apos;t have happened</p>;
   }
   return (
-    <Document title="chat - Error">
+    <Document title="chatr - Error">
       <Layout>
         <header>
           {caught.status}: {caught.statusText}
